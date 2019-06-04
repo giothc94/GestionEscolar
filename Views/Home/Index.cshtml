@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center mt-5 pt-5">
+
+    <h1 class="display-4">Bienvenido</h1>
+    <p class="text-uppercase">Sistema para gestion y publicacion de calificaciones a estudiantes de la institucion</p>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-5 mt-3">
+        <div class="card text-center rounded border-primary">
+            <div class="card-body">
+                <h2 class="text-uppercase">docente</h2>
+                <a class="btn btn-primary mt-2 w-50" asp-controller="Home" asp-action="Docente">Ingresar</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 mt-3">
+        <div class="card text-center rounded border-success">
+            <div class="card-body">
+                <h2 class="text-uppercase">Estudiante</h2>
+                <a class="btn btn-success mt-2 w-50" asp-controller="Home" asp-action="Estudiante">Ingresar</a>
+            </div>
+        </div>
+    </div>
+</div>
