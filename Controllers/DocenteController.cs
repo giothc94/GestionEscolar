@@ -6,12 +6,22 @@ namespace GestionEscolar.Controllers
     {
         public IActionResult Index()
         {
-            ViewBag.Nombre = "Gabriel";
+            ViewBag.Nombre = "Gabriel Arguello";
             ViewBag.Materia = "Matematica Fiananciera";
             ViewBag.nr = 24;
             return View(ViewBag);
         }
         public IActionResult Notas()
+        {
+            return View();
+        }
+
+        public IActionResult Tareas()
+        {
+            return View();
+        }
+
+        public IActionResult Foros()
         {
             return View();
         }
