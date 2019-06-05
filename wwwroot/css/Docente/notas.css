@@ -1,0 +1,7 @@
+.card-btn {
+    display: block;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
