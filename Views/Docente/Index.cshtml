@@ -1,5 +1,32 @@
 @{
     ViewData["title"] = "Docente";
+    Layout = "_Docente";
 }
-
-<h1>Hola docente</h1>
+<div class="page-dashboard pt-3">
+    <div class="row title-panel">
+        <div class="col-12 text-right">
+            Cursos<strong> | </strong>
+            Bienvenido @ViewBag.Nombre
+        </div>
+    </div>
+    <div class="page-content pt-4">
+        <div class="d-flex flex-wrap justify-content-center">
+            <div class="card mr-2 mt-2">
+                <div class="card-body">
+                    <div class="card-title h1">A4-B3</div>
+                    <p class="card-text">Materia: @ViewBag.Materia</p>
+                    <p class="card-text">N Estudiantes: @ViewBag.nr</p>
+                    <input type="button" class="btn btn-outline-primary form-control" value="Revisar">
+                </div>
+            </div>
+            <div class="card mr-2 mt-2">
+                <div class="card-body">
+                    <div class="card-title h1">A3-B3</div>
+                    <p class="card-text">Materia: @ViewBag.Materia</p>
+                    <p class="card-text">N Estudiantes: @ViewBag.nr</p>
+                    <input type="button" class="btn btn-outline-primary form-control" value="Revisar">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
