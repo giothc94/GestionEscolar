@@ -5,28 +5,144 @@
 <div class="page-dashboard pt-3">
     <div class="row title-panel">
         <div class="col-12 text-right">
-            Cursos<strong> | </strong>
+            Gestion escolar<strong> | </strong>
             Bienvenido @ViewBag.Nombre
         </div>
     </div>
     <div class="page-content pt-4">
+        <!-- Seccion cursos -->
         <div class="d-flex flex-wrap justify-content-center">
             <div class="card mr-2 mt-2">
                 <div class="card-body">
-                    <div class="card-title h1">A4-B3</div>
-                    <p class="card-text">Materia: @ViewBag.Materia</p>
-                    <p class="card-text">N Estudiantes: @ViewBag.nr</p>
-                    <input type="button" class="btn btn-outline-primary form-control" value="Revisar">
+                    <div class="card-title h2">A4-B3</div>
+                    <p class="card-text"> @ViewBag.Materia </p>
+                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                        Revisar
+                    </button>
+                </div>
+            </div>
+            <!-- test -->
+            <div class="card mr-2 mt-2">
+                <div class="card-body">
+                    <div class="card-title h2">A4-B3</div>
+                    <p class="card-text"> @ViewBag.Materia </p>
+                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                        Revisar
+                    </button>
                 </div>
             </div>
             <div class="card mr-2 mt-2">
                 <div class="card-body">
-                    <div class="card-title h1">A3-B3</div>
-                    <p class="card-text">Materia: @ViewBag.Materia</p>
-                    <p class="card-text">N Estudiantes: @ViewBag.nr</p>
-                    <input type="button" class="btn btn-outline-primary form-control" value="Revisar">
+                    <div class="card-title h2">A4-B3</div>
+                    <p class="card-text"> @ViewBag.Materia </p>
+                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                        Revisar
+                    </button>
+                </div>
+            </div>
+            <div class="card mr-2 mt-2">
+                <div class="card-body">
+                    <div class="card-title h2">A4-B3</div>
+                    <p class="card-text"> @ViewBag.Materia </p>
+                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                        Revisar
+                    </button>
+                </div>
+            </div>
+            <div class="card mr-2 mt-2">
+                <div class="card-body">
+                    <div class="card-title h2">A4-B3</div>
+                    <p class="card-text"> @ViewBag.Materia </p>
+                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                        Revisar
+                    </button>
+                </div>
+            </div>
+            <div class="card mr-2 mt-2">
+                <div class="card-body">
+                    <div class="card-title h2">A4-B3</div>
+                    <p class="card-text"> @ViewBag.Materia </p>
+                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                        Revisar
+                    </button>
+                </div>
+            </div>
+            <div class="card mr-2 mt-2">
+                <div class="card-body">
+                    <div class="card-title h2">A4-B3</div>
+                    <p class="card-text"> @ViewBag.Materia </p>
+                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                        Revisar
+                    </button>
+                </div>
+            </div>
+            <div class="card mr-2 mt-2">
+                <div class="card-body">
+                    <div class="card-title h2">A4-B3</div>
+                    <p class="card-text"> @ViewBag.Materia </p>
+                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                        Revisar
+                    </button>
+                </div>
+            </div>
+            <!-- fintest -->
+        </div>
+        <!-- Fin seccion cursos -->
+        <!-- Inicio seccion mensaje -->
+        <div class="row justify-content-center mt-2">
+            <div class="col-8">
+                
+                <div class="list-group-item d-flex justify-content-between align-items-center">
+                    <label>Mensajes</label>
+                    <span class="badge badge-primary badge-pill">14</span>
                 </div>
             </div>
         </div>
+        <!-- Fin seccion mensajes -->
+        <!-- Seccion Pendientes y publicaciones activas -->
+        <div class="row justify-content-center mt-2">
+            <div class="col-5">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action text-white bg-primary" style="cursor: auto;">
+                        Pendientes
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar Foro: Ramsonware</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action text-white bg-info" style="cursor: auto;">
+                        Publicaciones activas
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Tarea: Programacion Visual II</a>
+                    <a href="#" class="list-group-item list-group-item-action">Foro: Ramsonware</a>
+                    <a href="#" class="list-group-item list-group-item-action">Tarea: Matematica financiera</a>
+                </div>
+            </div>
+        </div>
+        <!-- Fin Seccion Pendientes y publicaciones activas -->
     </div>
-</div>
+     <!-- Modal info curso -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Informacion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-title h2">A4-B3</div>
+                <p class="card-text"> @ViewBag.Materia </p>
+                <p class="card-text">Numero de estudiantes: @ViewBag.nr</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    <!-- Fin Modal info curso -->
