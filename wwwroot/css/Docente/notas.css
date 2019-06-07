@@ -5,3 +5,41 @@
 ::-webkit-scrollbar {
     display: none;
 }
+
+.fila {
+    border: 1px solid red;
+    display: table;
+    width: 100%;
+}
+
+.celda {
+    border: 1px solid black;
+    display: table-cell;
+    text-align: center;
+}
+
+.celda-head {
+    border: 1px solid black;
+    padding: 10px;
+    display: table-cell;
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.input-notas {
+    width: 40%;
+    border: none;
+}
+
+tr.sniff-row:hover .celda {
+    background: #7dabb55e !important;
+}
+
+tr td input:focus {
+    background: #7dabb55e !important;
+}

@@ -8,7 +8,27 @@
         <a  class="alert-link">Foros</a><strong class="pr-1 pl-2">></strong>
     </div>
     <div class="page-content pt-4">
-        <div class="card">
+        <div class="row justify-content-center">
+             <div class="col-5">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action text-white bg-info" style="cursor: auto;">
+                        Pendientes
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar Foro: Ramsonware</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
+                </div>
+                <div class="list-group mt-3">
+                    <a class="list-group-item list-group-item-action text-white bg-info" style="cursor: auto;">
+                        Activas
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar Foro: Ramsonware</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
+                </div>
+            </div>
+            <div class="col-7"?>
+                <div class="card">
             <div class="card-body">
                 <div class="h2">
                     Hilos de conversacion
@@ -26,32 +46,35 @@
             </div>
         </div>
             <!-- Cuerpo foro -->
-            <div class="card mt-3">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="titulo-tarea">Ingresa un tema para el hilo</label>
-                        <input id="titulo-tarea" class="form-control" type="text">
-                    </div>
-                    <div class="form-group">
-                        <label for="descripcion-tarea">Ingrese una descripcion</label><br>
-                        <small class="text-info">* Asegurate de establecer reglas claras.</small><br>
-                        <small class="text-info">* Define un numero de participacion por estudiantes.</small>
-                        <textarea id="descripcion-tarea" class="form-control" row="5"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="horas-tarea">Limite de tiempo</label><br>
-                        <small class="text-danger">*El tiempo contara desde el momento de su publicacion</small>
-                        <select id="horas-tarea" class="form-control">
-                            <option>-- Selecciona el tiempo limite --</option>
-                            <option>12 Horas</option>
-                            <option>24 Horas</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control btn btn-info mt-2" type="button" value="Abrir hilo">
-                    </div>
-
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="titulo-tarea">Ingresa un tema para el hilo</label>
+                    <input id="titulo-tarea" class="form-control" type="text">
                 </div>
+                <div class="form-group">
+                    <label for="descripcion-tarea">Ingrese una descripcion</label><br>
+                    <small class="text-info">* Asegurate de establecer reglas claras.</small><br>
+                    <small class="text-info">* Define un numero de participacion por estudiantes.</small>
+                    <textarea id="descripcion-tarea" class="form-control" row="5"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="horas-tarea">Limite de tiempo</label><br>
+                    <small class="text-danger">*El tiempo contara desde el momento de su publicacion</small>
+                    <select id="horas-tarea" class="form-control">
+                        <option>-- Selecciona el tiempo limite --</option>
+                        <option>12 Horas</option>
+                        <option>24 Horas</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input class="form-control btn btn-info mt-2" type="button" value="Abrir hilo">
+                </div>
+
             </div>
+        </div>
+            </div>
+        </div>
+        
     </div>
 </div>
