@@ -1,0 +1,58 @@
+@{
+    Layout = "_Docente";
+}
+<div class="page-dashboard pt-3">
+    <div class="alert alert-success" role="alert">
+        <a href="/Docente/Index" class="alert-link">Docente</a><strong class="pr-1 pl-2">></strong>
+        <a href="/Docente/Tareas" class="alert-link">Tareas</a><strong class="pr-1 pl-2">></strong>
+        <a href="" class="alert-link">Curso ...</a><strong class="pr-1 pl-2">></strong>
+    </div>
+    
+    <div class="page-content pt-4">
+        <div class="row justify-content-around mt-3">
+            <div class="col-7">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Tarea: Nombre de la tarea</div>
+                        <div class="card-text">
+                            <p>
+                                Materia: Matematica financiera
+                            </p>
+                            <p>
+                                Numero de recepciones: 24 / 25 
+                            </p>
+                            <p>
+                                Atrasadas: 3
+                            </p>
+                            <p class="text-danger">
+                                <small>* Puedes descargar todas las tareas o revisar una por una.</small>
+                            </p>
+                            <div class="form-group">
+                                <input class="btn btn-info form-control" type="button" value="Revisar una por una " />
+                            </div>
+                            <div class="form-group">
+                                <input class="btn btn-outline-success form-control" type="button" value="Decargar todo" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="list-group box-shadow">
+                    <a class="list-group-item list-group-item-action text-white bg-primary" style="cursor: auto;">
+                        Pendientes
+                    </a>
+                    <a href="/Revision/Index" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
+                    <a href="/Revision/Index" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
+                </div>
+                <div class="list-group mt-3 box-shadow">
+                    <a class="list-group-item list-group-item-action text-white bg-primary" style="cursor: auto;">
+                        Activas
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

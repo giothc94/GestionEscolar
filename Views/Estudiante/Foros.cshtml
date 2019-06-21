@@ -1,0 +1,29 @@
+@{
+    Layout = "_Estudiante";
+}
+<div class="page-dashboard pt-3">
+    <div class="page-content pt-4">
+    @for (int i = 1; i <= 6; i++)
+    {
+        <div class="card mt-4 box-shadow bg-light">
+            <div class="card-body">
+                <div class=" card-title text-right text-uppercase text-dark h2">Programacion visual ii</div>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <small><strong>Titulo: </strong></small>
+                        <small>Titulo del foro </small><br><br>
+                        <small><strong>Descripcion del foro: </strong></small><br>
+                        <small>Descripcion corta del foro </small>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+                            <a class="btn btn-outline-primary w-25" href="/Estudiante/ParticipacionForos/32">Empezar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

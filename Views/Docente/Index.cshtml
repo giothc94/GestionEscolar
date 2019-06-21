@@ -12,107 +12,46 @@
     <div class="page-content pt-4">
         <!-- Seccion cursos -->
         <div class="d-flex flex-wrap justify-content-center">
-            <div class="card mr-2 mt-2">
-                <div class="card-body">
-                    <div class="card-title h2">A4-B3</div>
-                    <p class="card-text"> @ViewBag.Materia </p>
-                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                        Revisar
-                    </button>
+            @for (int i = 0; i < 7; i++)
+            {
+                <div class="card mr-2 mt-2 box-shadow">
+                    <div class="card-body">
+                        <div class="card-title h2">A4-B3</div>
+                        <p class="card-text"> @ViewBag.Materia </p>
+                        <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
+                            Revisar
+                        </button>
+                    </div>
                 </div>
-            </div>
-            <!-- test -->
-            <div class="card mr-2 mt-2">
-                <div class="card-body">
-                    <div class="card-title h2">A4-B3</div>
-                    <p class="card-text"> @ViewBag.Materia </p>
-                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                        Revisar
-                    </button>
-                </div>
-            </div>
-            <div class="card mr-2 mt-2">
-                <div class="card-body">
-                    <div class="card-title h2">A4-B3</div>
-                    <p class="card-text"> @ViewBag.Materia </p>
-                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                        Revisar
-                    </button>
-                </div>
-            </div>
-            <div class="card mr-2 mt-2">
-                <div class="card-body">
-                    <div class="card-title h2">A4-B3</div>
-                    <p class="card-text"> @ViewBag.Materia </p>
-                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                        Revisar
-                    </button>
-                </div>
-            </div>
-            <div class="card mr-2 mt-2">
-                <div class="card-body">
-                    <div class="card-title h2">A4-B3</div>
-                    <p class="card-text"> @ViewBag.Materia </p>
-                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                        Revisar
-                    </button>
-                </div>
-            </div>
-            <div class="card mr-2 mt-2">
-                <div class="card-body">
-                    <div class="card-title h2">A4-B3</div>
-                    <p class="card-text"> @ViewBag.Materia </p>
-                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                        Revisar
-                    </button>
-                </div>
-            </div>
-            <div class="card mr-2 mt-2">
-                <div class="card-body">
-                    <div class="card-title h2">A4-B3</div>
-                    <p class="card-text"> @ViewBag.Materia </p>
-                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                        Revisar
-                    </button>
-                </div>
-            </div>
-            <div class="card mr-2 mt-2">
-                <div class="card-body">
-                    <div class="card-title h2">A4-B3</div>
-                    <p class="card-text"> @ViewBag.Materia </p>
-                    <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                        Revisar
-                    </button>
-                </div>
-            </div>
-            <!-- fintest -->
+            }
         </div>
         <!-- Fin seccion cursos -->
         <!-- Inicio seccion mensaje -->
         <div class="row justify-content-center mt-2">
-            <div class="col-8">
-                
-                <div class="list-group-item d-flex justify-content-between align-items-center">
-                    <label>Mensajes</label>
-                    <span class="badge badge-primary badge-pill">14</span>
-                </div>
+            <div class="col-8 cursor-pointer">
+                <a class="text-decoration-none text-info" href="/Mensajes">
+                    <div class="card d-flex flex-row justify-content-between align-items-center p-3">
+                        <label class="cursor-pointer">Mensajes</label>
+                        <span class="badge badge-info badge-pill">14</span>
+                    </div>
+                </a>
             </div>
         </div>
         <!-- Fin seccion mensajes -->
         <!-- Seccion Pendientes y publicaciones activas -->
         <div class="row justify-content-center mt-2">
             <div class="col-5">
-                <div class="list-group">
+                <div class="list-group box-shadow">
                     <a class="list-group-item list-group-item-action text-white bg-primary" style="cursor: auto;">
                         Pendientes
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
-                    <a href="#" class="list-group-item list-group-item-action">Revisar Foro: Ramsonware</a>
-                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
+                    <a href="/Revision/Index" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
+                    <a href="/Revision/Index" class="list-group-item list-group-item-action">Revisar Foro: Ramsonware</a>
+                    <a href="/Revision/Index" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
                 </div>
             </div>
             <div class="col-5">
-                <div class="list-group">
+                <div class="list-group box-shadow">
                     <a class="list-group-item list-group-item-action text-white bg-info" style="cursor: auto;">
                         Publicaciones activas
                     </a>

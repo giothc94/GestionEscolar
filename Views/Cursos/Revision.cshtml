@@ -5,10 +5,83 @@
     <div class="alert alert-success" role="alert">
         <a class="alert-link">Docente</a><strong class="pr-1 pl-2">></strong>
         <a href="/Docente/Index" class="alert-link">Cursos</a><strong class="pr-1 pl-2">></strong>
-        <a class="alert-link">Revision</a><strong class="pr-1 pl-2">></strong>
+        <a class="alert-link">Nombre del curso</a><strong class="pr-1 pl-2">></strong>
     </div>
     
     <div class="page-content pt-4">
-        
+        <div class="row justify-content-start">
+            <div class="col-6">
+                <strong>Nombre del curso: </strong><label class="text-uppercase">Matematica financiera</label>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-3">
+            <div class="col-5">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action text-white bg-warning" style="cursor: auto;">
+                        Pendientes
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="list-group">
+                    <a class="list-group-item list-group-item-action text-white bg-primary" style="cursor: auto;">
+                        Activas
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Programacion Visual II</a>
+                    <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center mt-5">
+            <div class="form-group">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Buca un estudiante" aria-label="Search">
+                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
+                </form>
+            </div>
+        </div>
+        <div class="row mt-3 justify-content-center">
+            <div class="col-10">
+                <table>
+                    <thead>
+                        <th class="bg-info text-white celda-head">Nro</th>
+                        <th class="bg-info text-white celda-head">Estudiante</th>
+                        <th class="bg-info text-white celda-head">C.I</th>
+                        <th class="bg-info text-white celda-head">Nota Tareas</th>
+                        <th class="bg-info text-white celda-head">Nota Pruebas</th>
+                        <th class="bg-info text-white celda-head">Nota Proyecto</th>
+                        <th class="bg-info text-white celda-head">Promedio</th>
+                        <th class="bg-info text-white celda-head">Observacion</th>
+                    </thead>
+                    <tbody>
+                        @for (int i = 1; i <= 25; i++)
+                        {
+                            <tr class="sniff-row" onmouseover="hover(event)">
+                                <td class="celda">@i</td>
+                                <td class="celda">Geovanny Arguello</td>
+                                <td class="celda">1716715972</td>
+                                <td class="celda">
+                                    <label>10</label>
+                                </td>
+                                <td class="celda">
+                                    <label>10</label>
+                                </td>
+                                <td class="celda">
+                                    <label>10</label>
+                                </td>
+                                <td class="celda">
+                                    <label>10</label>
+                                </td>
+                                <td class="celda">
+                                    <label>Aprobado</label>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

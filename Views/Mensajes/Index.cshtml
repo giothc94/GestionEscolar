@@ -1,0 +1,63 @@
+@{
+    Layout = "_Docente";
+}
+<div class="page-dashboard pt-3">
+    <div class="alert alert-success" role="alert">
+        <a href="/Docente/Index" class="alert-link">Docente</a><strong class="pr-1 pl-2">></strong>
+        <a  class="alert-link">Mensajes</a><strong class="pr-1 pl-2">></strong>
+    </div>
+
+    <div class="page-content pt-4">    
+        <!-- Mensajes enviados y recibidos -->
+        <div class="row mt-3 justify-content-around">
+            <div class="col-5 card">
+                <div class="card-body">
+                    <div class="h4">Recibidos</div>
+                </div>
+            </div>
+            <div class="col-5 card">
+                <div class="card-body">
+                    <div class="h4">Enviados</div>                
+                </div>
+            </div>
+        </div>
+        <!-- Fin mensajes enviados y recibidos -->
+        <!-- Formulario mensje -->
+        <div class="row justify-content-center mt-3">
+            <div class="col-8">
+                <div class="card p-3">
+                    <div class="form-group">
+                        <label>Selecciona un curso</label>
+                        <select class="form-control">
+                            @for (int i = 0; i < 4; i++)
+                            {
+                                <option>Curso @i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Selecciona el destinatario</label>
+                        <select class="form-control">
+                            @for (int i = 0; i < 25; i++)
+                            {
+                                <option>destinatario @i</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Asunto</label>
+                        <input class="form-control" type="text" placeholder="Asunto del mensaje">
+                    </div>
+                    <div class="form-group">
+                        <label>Mensaje:</label>
+                        <textarea class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control btn btn-info" type="button" value="Enviar mensaje" value="Enviar mensaje">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fin formulario mensaje -->
+    </div>
+</div>
