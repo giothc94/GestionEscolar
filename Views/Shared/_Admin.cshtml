@@ -16,34 +16,47 @@
               integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"/>
     </environment>
     <link rel="stylesheet" href="~/css/site.css" />
-    <link rel="stylesheet" href="~/css/docente.css" />
-    <link rel="stylesheet" href="~/css/Docente/index.css" />
-    <link rel="stylesheet" href="~/css/Docente/notas.css" />
 </head>
-<body style="margin-bottom: 0px">
-    <div class="dashboard">
-        <div class="menu-dashboard">
-            <div class="content-menu-dashboard">
-                <div class="perfil-dashboard">
-                    <figure class="img-dashboard">
-                        <img width="200" height="200" src="http://www.servicio.sistemascontino.com.mx/imagenes/avatar.jpg">
-                    </figure>
-                    <p class="h3" style="color: lightgray !important">Gabriel Costta</p>
-                </div>
-                <div class="items-dashboard">
-                    <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Index">Materias</a></div>
-                    <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Notas">Notas</a></div>
-                    <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Tareas">Tareas</a></div>
-                    <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Foros">Hilos</a></div>
-                <a class="btn btn-info mt-5 mr-2" href="/Home/Docente">Cerrar sesion</a>
-                </div>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a class="navbar-brand">Gestion Escolar</a>
+            </div>
+        </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <ul class="nav mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="RegistrarDocente">Registrar docente</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="RegistrarMateria">Reistrar materia</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="RegistrarCarrera">Registrar carrera</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="RegistrarEstudiante">Registrar estudiante</a>
+                    </li>
+                </ul>
             </div>
         </div>
-        <div class="content-dashboard">
-            @RenderBody()
-        </div>
     </div>
-</body>
+    </header>
+    <div class="container">
+        <partial name="_CookieConsentPartial" />
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2019 - Gestion Escolar - <a>giothcode</a>
+        </div>
+    </footer>
+
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
@@ -63,6 +76,13 @@
         </script>
     </environment>
     <script src="~/js/site.js" asp-append-version="true"></script>
-
+    <script>
+        function openWindow(url){
+            alert(window)
+            window.open(url,'_blank')
+            window.focus()
+        }
+    </script>
     @RenderSection("Scripts", required: false)
+</body>
 </html>

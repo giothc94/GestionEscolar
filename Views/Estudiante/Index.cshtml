@@ -22,7 +22,7 @@
                                 <tbody>
                                     @for (int i = 1; i <= 6; i++)
                                     {
-                                        <tr onmouseover="hover(event)">
+                                        <tr>
                                             <td class="celda">Alguna asignatura</td>
                                             <td class="celda">1716715972</td>
                                             <td class="celda">
@@ -39,6 +39,45 @@
                                             </td>
                                             <td class="celda">
                                                 <label>Aprobado</label>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+        <div class="card mt-4 box-shadow-dark">
+            <div class="card-body">
+                <div class=" card-title text-right h2 text-uppercase text-dark">Tareas</div>
+                    <hr>
+                    <div class="row w-100 justify-content-center m-0">
+                        <div class="col-12">
+                            <table class="w-100">
+                                <thead>
+                                    <th class="bg-secondary text-white celda-head">Asignatura</th>
+                                    <th class="bg-secondary text-white celda-head">Docente</th>
+                                    <th class="bg-secondary text-white celda-head">Nombre de la tarea</th>
+                                    <th class="bg-secondary text-white celda-head">C.I</th>
+                                    <th class="bg-secondary text-white celda-head">Nota</th>
+                                    <th class="bg-secondary text-white celda-head">Observacion</th>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 1; i <= 6; i++)
+                                    {
+                                        <tr>
+                                            <td class="celda">Alguna asignatura</td>
+                                            <td class="celda">Docente de algo</td>
+                                            <td class="celda">Algun nombre</td>
+                                            <td class="celda">1716715972</td>
+                                            <td class="celda">
+                                                <label>10</label>
+                                            </td>
+                                            <td class="celda">
+                                                <label>Revisada</label>
                                             </td>
                                         </tr>
                                     }

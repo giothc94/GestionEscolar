@@ -1,0 +1,44 @@
+@{
+    Layout = "_Estudiante";
+}
+<div class="page-dashboard pt-3">
+    <div class="h2">
+        Tema del foro
+    </div>
+    <div class="page-content mt-2">
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title">Descripcion</div>
+                        <div class="card-text">
+                            Descripcion del hilo.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <form method="POST" action="/Estudiante/ParticipacionForos/">
+                    <input name="idForo" type="hidden" value="32">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="card-title">
+                                Tu participacion.
+                            </div>
+                            <textarea class="form-control" rows="5">
+
+                            </textarea>
+                            <div class="text-right mt-2">
+                                <small class="p-3">Gabriel Costta</small>
+                                <input class="btn btn-outline-success" type="submit" value="Ingresar" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

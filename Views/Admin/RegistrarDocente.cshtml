@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-route="Ingresar">Inicio</a></li>
+                <li class="breadcrumb-item" aria-current="page">Registro de docentes</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-4">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar, C.I Docente" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="card-title">Lista</div>
+                <div style="height: 400px;overflow: auto;">
+                    @for (int i = 0; i < 50; i++)
+                    {
+                        <div class="border border-dark rounded p-2 mb-2 d-flex flex-wrap justify-content-between align-items-center">
+                            <div>
+                                <small>Cedula: @i</small><br>
+                                <small>Nombre: @i</small><br>
+                                <small>Area: @i</small><br>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="editar" class="btn btn-warning">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        @if(ViewBag.mensaje == null)
+        {
+            <form asp-controller="Admin" asp-action="RegistrarDocente" method="POST">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h2">Registro de docente</div>
+                        <div class="form-group">
+                            <label for="cedula">Cedula</label>
+                            <input name="cedulaDocente" id="cedula" class="form-control" type="text" placeholder="C.I">
+                        </div>
+                        <div class="form-group">
+                            <label>Nombres</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="primerNombre" type="text" placeholder="Primer nombre">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="segundoNombre" type="text" placeholder="Segundo nombre">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Apellidos</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="primerApellido" type="text" placeholder="Primer apellido">
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="segundoApellido" type="text" placeholder="Segundo apellido">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="titulo">Titulo</label>
+                            <input id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo">
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-success form-control" value="Registrar" type="submit">
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+        else
+        {
+            <div class="alert alert-danger">@ViewBag.mensaje</div>
+        }
+    </div>
+</div>

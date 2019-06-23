@@ -1,0 +1,104 @@
+<div class="row">
+    <div class="col-12">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-route="Ingresar">Inicio</a></li>
+                <li class="breadcrumb-item" aria-current="page">Registro de materia</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-4">
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar, Codigo" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+        </form>
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="card-title">Lista</div>
+                <div style="height: 400px;overflow: auto;">
+                    @for (int i = 0; i < 50; i++)
+                    {
+                        <div class="border border-dark rounded p-2 mb-2 d-flex flex-wrap justify-content-between align-items-center">
+                            <div>
+                                <small>Materia: @i</small><br>
+                                <small>Area: @i</small><br>
+                                <small>Carreras: @i</small><br>
+                                <small>Codigo: @i</small><br>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" value="editar" class="btn btn-warning">
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <form>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title h2">Registro de materia</div>
+                    <div class="form-group">
+                        <label for="cedula">Nombre de la materia</label>
+                        <input id="cedula" class="form-control" type="text" placeholder="... nombre de la materia">
+                    </div>
+                    <div class="form-group">
+                        <label>Area</label>
+                        <select id="materia" class="form-control">
+                            <optgroup>
+                                <option>-- Seleccione el area    --</option>
+                                @for (int i = 0; i < 4; i++)
+                                {
+                                    <option>Area @i</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Carrera</label>
+                        <select id="materia" class="form-control">
+                            <optgroup>
+                                <option>-- Seleccione la carrera    --</option>
+                                @for (int i = 0; i < 4; i++)
+                                {
+                                    <option>Area @i</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nivel</label>
+                        <select id="materia" class="form-control">
+                            <optgroup>
+                                <option>-- Seleccione el nivel    --</option>
+                                @for (int i = 0; i < 4; i++)
+                                {
+                                    <option>Area @i</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Docente</label>
+                        <select id="materia" class="form-control">
+                            <optgroup>
+                                <option>-- Seleccione el docente    --</option>
+                                @for (int i = 0; i < 4; i++)
+                                {
+                                    <option>Area @i</option>
+                                }
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success form-control" value="Registrar" type="submit">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
