@@ -33,8 +33,7 @@ namespace GestionEscolar.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=giothcode-dev;Database=gestion_escolar;User Id=sa;Password=Marvotouch-094027542;Trusted_connection=false");
+                optionsBuilder.UseSqlServer("Server="+DbConfig.SERVERNAME+";Database="+DbConfig.DBNAME+";User Id="+DbConfig.USER+";Password="+DbConfig.PASSWORD+";Trusted_connection=false");
             }
         }
 

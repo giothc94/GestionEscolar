@@ -2,7 +2,7 @@
     <div class="col-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-route="Ingresar">Inicio</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Inicio</a></li>
                 <li class="breadcrumb-item" aria-current="page">Registro de docentes</li>
             </ol>
         </nav>
@@ -10,24 +10,22 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-4">
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar, C.I Docente" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+        <div class="form-inline my-2 my-lg-0">
+            <input id="cedula" name="cedula" class="form-control mr-sm-2" type="search" placeholder="Buscar, C.I Docente" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" onclick="BuscarDocente()">Buscar</button>
+        </div>
         <div class="card mt-3">
             <div class="card-body">
                 <div class="card-title">Lista</div>
                 <div style="height: 400px;overflow: auto;">
-                    @for (int i = 0; i < 50; i++)
+                    @foreach (var docente in ViewData["listaDocentes"] as List<Docente>)
                     {
                         <div class="border border-dark rounded p-2 mb-2 d-flex flex-wrap justify-content-between align-items-center">
                             <div>
-                                <small>Cedula: @i</small><br>
-                                <small>Nombre: @i</small><br>
-                                <small>Area: @i</small><br>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="editar" class="btn btn-warning">
+                                <small><strong>Cedula:</strong> @docente.CedulaDocente</small><br>
+                                <small><strong>Nombre:</strong> <br> @docente.NombreUno @docente.NombreDos </small><br>
+                                <small>@docente.ApellidoUno @docente.ApellidoDos </small><br>
+                                <small><strong>Titulo:</strong> @docente.Titulo</small><br>
                             </div>
                         </div>
                     }
@@ -44,19 +42,19 @@
                         <div class="card-title h2">Registro de docente</div>
                         <div class="form-group">
                             <label for="cedula">Cedula</label>
-                            <input name="cedulaDocente" id="cedula" class="form-control" type="text" placeholder="C.I">
+                            <input name="cedulaDocente" id="cedulaForm" class="form-control" onkeyup="busquedaFast()" type="text" placeholder="C.I">
                         </div>
                         <div class="form-group">
                             <label>Nombres</label>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="primerNombre" type="text" placeholder="Primer nombre">
+                                        <input id="primerNombre" class="form-control" name="primerNombre" type="text" placeholder="Primer nombre">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="segundoNombre" type="text" placeholder="Segundo nombre">
+                                        <input id="segundoNombre" class="form-control" name="segundoNombre" type="text" placeholder="Segundo nombre">
                                     </div>
                                 </div>
                             </div>
@@ -66,12 +64,12 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="primerApellido" type="text" placeholder="Primer apellido">
+                                        <input id="primerApellido" class="form-control" name="primerApellido" type="text" placeholder="Primer apellido">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="segundoApellido" type="text" placeholder="Segundo apellido">
+                                        <input id="segundoApellido" class="form-control" name="segundoApellido" type="text" placeholder="Segundo apellido">
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +79,13 @@
                             <input id="titulo" type="text" name="titulo" class="form-control" placeholder="Titulo">
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-success form-control" value="Registrar" type="submit">
+                            <input id="btnCancelar" class="btn btn-info form-control d-none" value="Cancelar" type="button">
+                        </div>
+                        <div class="form-group">
+                            <input id="btnRegistrar" class="btn btn-success form-control" value="Registrar" type="submit">
+                        </div>
+                        <div class="form-group">
+                            <input id="btnModificar" class="btn btn-warning form-control d-none" value="Modificar" type="submit">
                         </div>
                     </div>
                 </div>
@@ -89,7 +93,84 @@
         }
         else
         {
-            <div class="alert alert-danger">@ViewBag.mensaje</div>
+            <div class="alert alert-info">
+                <div class="d-flex justify-content-between">
+                    <strong>@ViewBag.mensaje</strong> <a class="btn btn-outline-info" asp-controller="Admin" asp-action="RegistrarDocente">Listo</a> 
+                </div>
+            </div>
+
         }
     </div>
 </div>
+<script>
+        var cedula = document.getElementById('cedula')
+        var ced = document.getElementById('cedulaForm')
+        var primerNombre = document.getElementById('primerNombre')
+        var segundoNombre = document.getElementById('segundoNombre')
+        var primerApellido = document.getElementById('primerApellido')
+        var segundoApellido = document.getElementById('segundoApellido')
+        var titulo = document.getElementById('titulo')
+        var btnRegistrar = document.getElementById('btnRegistrar')
+        var btnCancelar = document.getElementById('btnCancelar')
+        var btnModificar = document.getElementById('btnModificar')
+    function BuscarDocente(){
+        let cedu = cedula.value
+        btnCancelar.addEventListener('click',limpiarCampos)
+        if(cedu){
+            var req = fetch(`https://localhost:5001/api/Docente/Cedula/${cedu}`)
+            req
+                .then(function (resp){
+                    return resp.json();
+                })
+                .then(function (d){
+                    console.log(d)
+                    ced.value = d.cedulaDocente
+                    primerNombre.value = d.nombreUno
+                    segundoNombre.value = d.nombreDos
+                    primerApellido.value = d.apellidoUno
+                    segundoApellido.value = d.apellidoDos
+                    titulo.value  = d.titulo
+                    btnRegistrar.classList.add('d-none')
+                    btnModificar.classList.remove('d-none')
+                    btnCancelar.classList.remove('d-none')
+                })
+                .catch(e=>alert('Registro no encontrado'))
+        }
+    }
+
+    function limpiarCampos(){
+        cedula.value = ""
+        //ced.value = ""
+        primerNombre.value = ""
+        segundoNombre.value = ""
+        primerApellido.value = ""
+        segundoApellido.value = ""
+        titulo.value = ""
+        btnCancelar.classList.add('d-none')
+        btnModificar.classList.add('d-none')
+    }
+
+    function busquedaFast(){
+        var c = ced.value
+        var req = fetch(`https://localhost:5001/api/Docente/Cedula/${c}`)
+            req
+                .then(function (resp){
+                    return resp.json()
+                })
+                .then(function (d){
+                    ced.value = d.cedulaDocente
+                    primerNombre.value = d.nombreUno
+                    segundoNombre.value = d.nombreDos
+                    primerApellido.value = d.apellidoUno
+                    segundoApellido.value = d.apellidoDos
+                    titulo.value  = d.titulo
+                    btnRegistrar.classList.add('d-none')
+                    btnModificar.classList.remove('d-none')
+                    btnCancelar.classList.remove('d-none')
+                })
+                .catch(()=>{
+                    limpiarCampos()
+                    btnRegistrar.classList.remove('d-none')
+                })
+    }
+</script>

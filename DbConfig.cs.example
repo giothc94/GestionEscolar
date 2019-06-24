@@ -1,0 +1,8 @@
+namespace GestionEscolar{
+    public static class DbConfig{
+        public static string SERVERNAME = "";
+        public static string DBNAME = "";
+        public static string USER = "";
+        public static string PASSWORD = "";
+    }
+}

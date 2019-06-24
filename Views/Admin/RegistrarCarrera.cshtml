@@ -2,42 +2,54 @@
     <div class="col-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-route="Ingresar">Inicio</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Inicio</a></li>
                 <li class="breadcrumb-item" aria-current="page">Registro de carrera</li>
             </ol>
         </nav>
     </div>
 </div>
-
-<div class="row justify-content-center">
-    <div class="col-8">
-        <div class="card">
-            <div class="card-body">
-                <div class="card-title h2">Abrir carrera</div>
-                <div class="form-group">
-                    <label>Nombre de la carrera</label>
-                    <input type="text" class="form-control">
-                </div>
-                <div class="form-group">
-                    <label>Descripcion de la carrera</label>
-                    <textarea class="form-control" rows="5"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="director">Director de carrera</label>
-                    <select id="director" class="form-control">
-                        <optgroup>
-                            <option>-- Seleccione el director de carrera --</option>
-                            @for (int i = 0; i < 4; i++)
-                            {
-                                <option>director @i</option>
-                            }
-                        </optgroup>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input class="btn btn-success form-control" type="submit" value="Crear carrera">
+@if(ViewBag.mensaje == null)
+{
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-title h2">Abrir carrera</div>
+                    <form asp-controller="Admin" asp-action="RegistrarCarrera" method="POST">
+                        <div class="form-group">
+                            <label>Nombre de la carrera</label>
+                            <input name="nombreCarrera" type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Descripcion de la carrera</label>
+                            <textarea name="descripcionCarrera" class="form-control" rows="5"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="director">Director de carrera</label>
+                            <select id="director" name="idDocente" class="form-control">
+                                <optgroup>
+                                    <option value="0">-- Seleccione el director de carrera --</option>
+                                    @foreach (var docente in ViewData["listaDocentes"] as List<Docente>)
+                                    {
+                                        <option value="@docente.IdDocente">@docente.ApellidoUno @docente.ApellidoDos @docente.NombreUno @docente.NombreDos </option>
+                                    }
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-success form-control" type="submit" value="Crear carrera">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}
+else
+{
+    <div class="alert alert-info">
+        <div class="d-flex justify-content-between">
+            <strong>@ViewBag.mensaje</strong> <a class="btn btn-outline-info" asp-controller="Admin" asp-action="RegistrarCarrera">Listo</a> 
+        </div>
+    </div>
+}

@@ -2,7 +2,7 @@
     <div class="col-12">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a asp-route="Ingresar">Inicio</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Admin" asp-action="Index">Inicio</a></li>
                 <li class="breadcrumb-item" aria-current="page">Registro de estudiantes</li>
             </ol>
         </nav>
@@ -10,24 +10,21 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-4">
-        <form class="form-inline my-2 my-lg-0">
+        <!-- <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Buscar, C.I Estudiante" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
+        </form> -->
         <div class="card mt-3">
             <div class="card-body">
                 <div class="card-title">Lista</div>
                 <div style="height: 400px;overflow: auto;">
-                    @for (int i = 0; i < 50; i++)
+                    @foreach (var estudiante in ViewData["listaEstudiantes"] as List<Estudiante>)
                     {
                         <div class="border border-dark rounded p-2 mb-2 d-flex flex-wrap justify-content-between align-items-center">
                             <div>
-                                <small>Cedula: @i</small><br>
-                                <small>Nombre: @i</small><br>
-                                <small>Carrera: @i</small><br>
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" value="editar" class="btn btn-warning">
+                                <small>Cedula: @estudiante.CedulaEstudiante</small><br>
+                                <small>Nombres:</small><br>
+                                <small>@estudiante.ApellidoUno @estudiante.ApellidoDos @estudiante.NombreUno @estudiante.NombreDos</small><br>
                             </div>
                         </div>
                     }
@@ -36,71 +33,103 @@
         </div>
     </div>
     <div class="col-8">
-        <form>
-            <div class="card">
-                <div class="card-body">
-                    <div class="card-title h2">Registro de Estudiante</div>
-                    <div class="form-group">
-                        <label for="cedula">Cedula</label>
-                        <input id="cedula" class="form-control" type="text" placeholder="C.I">
-                    </div>
-                    <div class="form-group">
-                        <label>Nombres</label>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="primerNombre" type="text" placeholder="Primer nombre">
+        @if(ViewBag.mensaje == null)
+        {
+            <form asp-controller="Admin" asp-action="RegistrarEstudiante" method="POST">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-title h2">Registro de Estudiante</div>
+                        <div class="form-group">
+                            <label for="cedula">Cedula</label>
+                            <input id="cedula" name="cedula" class="form-control" type="text" placeholder="C.I">
+                        </div>
+                        <div class="form-group">
+                            <label>Nombres</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="primerNombre" type="text" placeholder="Primer nombre">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="segundoNombre" type="text" placeholder="Segundo nombre">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="segundoNombre" type="text" placeholder="Segundo nombre">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Apellidos</label>
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="primerApellido" type="text" placeholder="Primer apellido">
+                        <div class="form-group">
+                            <label>Apellidos</label>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="primerApellido" type="text" placeholder="Primer apellido">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <input class="form-control" name="segundoApellido" type="text" placeholder="Segundo apellido">
+                                <div class="col-6">
+                                    <div class="form-group">
+                                        <input class="form-control" name="segundoApellido" type="text" placeholder="Segundo apellido">
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="materia">Carrera</label>
-                        <select id="materia" class="form-control">
-                            <optgroup>
-                                @for (int i = 0; i < 4; i++)
-                                {
-                                    <option>carrera @i</option>
-                                }
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="materia">Nivel</label>
-                        <select id="materia" class="form-control">
-                            <optgroup>
-                                @for (int i = 0; i < 4; i++)
-                                {
-                                    <option>Nivel @i</option>
-                                }
-                            </optgroup>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input class="btn btn-success form-control" value="Registrar" type="submit">
+                        <div class="form-group">
+                            <label>Carrera</label>
+                            <select id="carrera" name="carrera" class="form-control" onchange="cargarCombo();">
+                                <optgroup>
+                                    <option>-- Seleccione la carrera    --</option>
+                                    @foreach (var carrera in ViewData["listaCarreras"] as List<Carrera>)
+                                    {
+                                        <option value="@carrera.IdCarrera" >@carrera.NombreCarrera</option>
+                                    }
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nivel</label>
+                            <select id="nivel" name="nivel" class="form-control">
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input class="btn btn-success form-control" value="Registrar" type="submit">
+                        </div>
                     </div>
                 </div>
+            </form>
+        }
+        else
+        {
+             <div class="alert alert-info">
+                <div class="d-flex justify-content-between">
+                    <strong>@ViewBag.mensaje</strong> <a class="btn btn-outline-info" asp-controller="Admin" asp-action="RegistrarEstudiante">Listo</a> 
+                </div>
             </div>
-        </form>
+
+        }
     </div>
 </div>
+
+<script>
+
+    function cargarCombo(IdCarrera){
+        var carrera = document.getElementById('carrera')
+        var select = document.getElementById('nivel')
+        select.options.length = 0
+
+        var niveles = fetch(`https://localhost:5001/api/Carrera/Nivel/${carrera.value}`)
+            niveles
+                    .then(function(resp){
+                        return resp.json()
+                    })
+                    .then(function(nivel){
+                        Array.from(nivel).forEach(function(nv){
+                            var option = document.createElement('option')
+                            console.log(nv)
+                            option.text = nv.nivel1
+                            option.value = nv.idNivel
+                            select.add(option)
+                        })
+                    })
+    }
+</script>
