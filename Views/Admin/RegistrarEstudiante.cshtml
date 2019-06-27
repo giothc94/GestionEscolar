@@ -10,10 +10,6 @@
 </div>
 <div class="row justify-content-center">
     <div class="col-4">
-        <!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar, C.I Estudiante" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form> -->
         <div class="card mt-3">
             <div class="card-body">
                 <div class="card-title">Lista</div>
@@ -24,7 +20,7 @@
                             <div>
                                 <small>Cedula: @estudiante.CedulaEstudiante</small><br>
                                 <small>Nombres:</small><br>
-                                <small>@estudiante.ApellidoUno @estudiante.ApellidoDos @estudiante.NombreUno @estudiante.NombreDos</small><br>
+                                <small>@estudiante.ApellidoUno.ToUpper() @estudiante.ApellidoDos.ToUpper() @estudiante.NombreUno.ToUpper() @estudiante.NombreDos.ToUpper()</small><br>
                             </div>
                         </div>
                     }
@@ -41,19 +37,19 @@
                         <div class="card-title h2">Registro de Estudiante</div>
                         <div class="form-group">
                             <label for="cedula">Cedula</label>
-                            <input id="cedula" name="cedula" class="form-control" type="text" placeholder="C.I">
+                            <input id="cedula" name="cedula" onkeyup="busquedaFast()" class="form-control" type="text" placeholder="C.I">
                         </div>
                         <div class="form-group">
                             <label>Nombres</label>
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="primerNombre" type="text" placeholder="Primer nombre">
+                                        <input class="form-control" id="primerNombre" name="primerNombre" type="text" placeholder="Primer nombre">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="segundoNombre" type="text" placeholder="Segundo nombre">
+                                        <input class="form-control" id="segundoNombre" name="segundoNombre" type="text" placeholder="Segundo nombre">
                                     </div>
                                 </div>
                             </div>
@@ -63,12 +59,12 @@
                             <div class="row">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="primerApellido" type="text" placeholder="Primer apellido">
+                                        <input class="form-control" id="primerApellido" name="primerApellido" type="text" placeholder="Primer apellido">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <input class="form-control" name="segundoApellido" type="text" placeholder="Segundo apellido">
+                                        <input class="form-control" id="segundoApellido" name="segundoApellido" type="text" placeholder="Segundo apellido">
                                     </div>
                                 </div>
                             </div>
@@ -80,7 +76,7 @@
                                     <option>-- Seleccione la carrera    --</option>
                                     @foreach (var carrera in ViewData["listaCarreras"] as List<Carrera>)
                                     {
-                                        <option value="@carrera.IdCarrera" >@carrera.NombreCarrera</option>
+                                        <option value="@carrera.IdCarrera" name="carreras[]">@carrera.NombreCarrera</option>
                                     }
                                 </optgroup>
                             </select>
@@ -92,7 +88,13 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-success form-control" value="Registrar" type="submit">
+                            <input id="btnRegistrar" class="btn btn-success form-control" value="Registrar" type="submit">
+                        </div>
+                        <div class="form-group">
+                            <input id="btnCancelar" class="btn btn-info form-control d-none" value="Cancelar" type="button">
+                        </div>
+                        <div class="form-group">
+                            <input id="btnModificar" class="btn btn-warning form-control d-none" value="Modificar" type="submit">
                         </div>
                     </div>
                 </div>
@@ -111,6 +113,26 @@
 </div>
 
 <script>
+    var primerNombre = document.getElementById('primerNombre')
+    var segundoNombre = document.getElementById('segundoNombre')
+    var primerApellido = document.getElementById('primerApellido')
+    var segundoApellido = document.getElementById('segundoApellido')
+    var btnRegistrar = document.getElementById('btnRegistrar')
+    var btnCancelar = document.getElementById('btnCancelar')
+    var btnModificar = document.getElementById('btnModificar')
+    var carrera = document.getElementById('carrera')
+
+    btnCancelar.addEventListener('click',function(){
+        primerNombre.value = ""
+        segundoNombre.value = ""
+        primerApellido.value = ""
+        segundoApellido.value = ""
+        carrera.options.selectedIndex = 0
+        nivel.options.length = 0
+        btnRegistrar.classList.remove('d-none')
+        btnCancelar.classList.add('d-none')
+        btnModificar.classList.add('d-none')
+    })
 
     function cargarCombo(IdCarrera){
         var carrera = document.getElementById('carrera')
@@ -125,11 +147,56 @@
                     .then(function(nivel){
                         Array.from(nivel).forEach(function(nv){
                             var option = document.createElement('option')
-                            console.log(nv)
+                            option.setAttribute('name','niveles[]')
                             option.text = nv.nivel1
                             option.value = nv.idNivel
                             select.add(option)
                         })
                     })
     }
+
+    function busquedaFast(){
+        var cedula = document.getElementById('cedula')
+        var data = fetch(`https://localhost:5001/api/Estudiante/cedula/${cedula.value}`)
+                    .then(function(resp){
+                        return resp.json();
+                    })
+                    .then(function(estudiante){
+                        console.log(estudiante)
+                        primerNombre.value = estudiante.nombreUno.trim()
+                        segundoNombre.value = estudiante.nombreDos.trim()
+                        primerApellido.value = estudiante.apellidoUno.trim()
+                        segundoApellido.value = estudiante.apellidoDos.trim()
+                        for(let i = 0; i < carrera.options.length; i++){
+                            if(carrera.options[i].value == estudiante.idCarrera){
+                                carrera.options.selectedIndex = carrera.options[i].index
+                            }
+                        }
+                        cargarCombo(carrera.value)
+                        setTimeout(()=>{
+                            var nivel = document.getElementById('nivel')
+                            for(let i = 0; i < nivel.options.length; i++){
+                            if(nivel.options[i].value == estudiante.idNivel){
+                                nivel.options.selectedIndex = nivel.options[i].index
+                            }
+                        }
+                        },100)
+                        btnRegistrar.classList.add('d-none')
+                        btnCancelar.classList.remove('d-none')
+                        btnModificar.classList.remove('d-none')
+                    })
+                    .catch(function(e){
+                        console.error('ERROR::'+e)
+                        primerNombre.value = ""
+                        segundoNombre.value = ""
+                        primerApellido.value = ""
+                        segundoApellido.value = ""
+                        carrera.options.selectedIndex = 0
+                        nivel.options.length = 0
+                        btnRegistrar.classList.remove('d-none')
+                        btnCancelar.classList.add('d-none')
+                        btnModificar.classList.add('d-none')
+                    })
+    }
+
 </script>

@@ -7,21 +7,38 @@
                         Administrador
                     </div>
                     <hr>
-                    <div class="row">
-                        <form method="POST">
-                            <div class="col">
-                                <div class="form-group">
-                                    <input name="user" class="form-control" type="text" placeholder="Ingrese su usuario">
-                                </div>
-                                <div class="form-group">
-                                    <input name="password" class="form-control" type="text" placeholder="Ingrese su password">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control btn btn-success" asp-route="Ingresar" type="submit" value="Ingresar">
+                    @if(ViewBag.mensaje != null)
+                    {
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card alert alert-danger">
+                                    @ViewBag.mensaje
+                                    <a asp-controller="Admin" asp-action="Index" class="btn btn-outline-danger">Regresar</a>
                                 </div>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row justify-content-center">
+                            <form method="POST" asp-controller="Admin" asp-action="Index">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <input name="user" class="form-control" type="text" placeholder="Ingrese su usuario">
+                                    </div>
+                                    <div class="form-group">
+                                        <input name="password" class="form-control" type="text" placeholder="Ingrese su password">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control btn btn-success" type="submit" value="Ingresar">
+                                    </div>
+                                    <div class="form-group">
+                                        <a asp-controller="Home" asp-action="Index" class="btn btn-info form-control">Salir</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

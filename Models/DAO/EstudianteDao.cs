@@ -36,33 +36,34 @@ namespace GestionEscolar.Models.DAO
             List<Estudiante> listaEstudiantes;
             using (var context = new GestionEscolar())
             {
-                listaEstudiantes = context.Estudiante.ToList();
+                listaEstudiantes = context.Estudiante.OrderByDescending(d => d).ToList();
             }
             return listaEstudiantes;
         }
-        public static Docente BuscarDocentePorCedula(string cedula)
+        public static Estudiante BuscarEstudiantePorCedula(string cedula)
         {
-            Docente docente;
+            Estudiante estudiante;
             using (var context = new GestionEscolar())
             {
-                docente = context.Docente.Where(d => d.CedulaDocente == cedula).FirstOrDefault();
+                estudiante = context.Estudiante.Where(e => e.CedulaEstudiante == cedula).FirstOrDefault();
             }
-            return docente;
+            return estudiante;
         }
-        public static bool ModificarDocente(Docente oldDocente, Docente newDocente)
+        public static bool ModificarEstudiante(Estudiante oldEstudiante, Estudiante newEstudiante)
         {
             var v = false;
             try
             {
                 using (var context = new GestionEscolar())
                 {
-                    var result = context.Docente.Where(d => d.CedulaDocente == oldDocente.CedulaDocente).FirstOrDefault();
-                    result.CedulaDocente = newDocente.CedulaDocente;
-                    result.NombreUno = newDocente.NombreUno;
-                    result.NombreDos = newDocente.NombreDos;
-                    result.ApellidoUno = newDocente.ApellidoUno;
-                    result.ApellidoDos = newDocente.ApellidoDos;
-                    result.Titulo = newDocente.Titulo;
+                    var result = context.Estudiante.Where(d => d.CedulaEstudiante == oldEstudiante.CedulaEstudiante).FirstOrDefault();
+                    result.CedulaEstudiante = newEstudiante.CedulaEstudiante;
+                    result.NombreUno = newEstudiante.NombreUno;
+                    result.NombreDos = newEstudiante.NombreDos;
+                    result.ApellidoUno = newEstudiante.ApellidoUno;
+                    result.ApellidoDos = newEstudiante.ApellidoDos;
+                    result.IdCarrera = newEstudiante.IdCarrera;
+                    result.IdNivel = newEstudiante.IdNivel;
                     context.SaveChanges();
                 }
                 v = true;
