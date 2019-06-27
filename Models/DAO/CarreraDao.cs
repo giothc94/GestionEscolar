@@ -17,7 +17,8 @@ namespace GestionEscolar.Models.DAO
                     context.Carrera.Add(carrera);
                     for (int i = 1; i <= 6; i++)
                     {
-                        var n = new Nivel(){
+                        var n = new Nivel()
+                        {
                             Nivel1 = i,
                             IdCarrera = carrera.IdCarrera
                         };
@@ -30,9 +31,9 @@ namespace GestionEscolar.Models.DAO
             catch (System.Exception e)
             {
                 Debug.WriteLine("-------------------------DEBUGGER INGRESO CARRERA-----------------------------------");
-                Debug.WriteLine("DEBUGGER::MESSAGE:: "+e.Message);
-                Debug.WriteLine("DEBUGGER::STACKTRACE:: "+e.StackTrace);
-                Debug.WriteLine("DEBUGGER::INNEREXCEPTION:: "+e.InnerException);
+                Debug.WriteLine("DEBUGGER::MESSAGE:: " + e.Message);
+                Debug.WriteLine("DEBUGGER::STACKTRACE:: " + e.StackTrace);
+                Debug.WriteLine("DEBUGGER::INNEREXCEPTION:: " + e.InnerException);
                 Debug.WriteLine("-------------------------DEBUGGER INGRESO CARRERA-----------------------------------");
                 v = false;
             }
@@ -57,6 +58,28 @@ namespace GestionEscolar.Models.DAO
             }
             return niveles;
         }
-        
+
+        public static List<CarreraFull> ListaCarreraFull()
+        {
+            var lista = new List<Carrera>();
+            var carreras = new List<CarreraFull>();
+            using (var context = new GestionEscolar())
+            {
+                lista = context.Carrera.ToList();
+                foreach (var carrera in lista)
+                {
+                    CarreraFull cf = new CarreraFull()
+                    {
+                        IdCarrera = carrera.IdCarrera,
+                        NombreCarrera = carrera.NombreCarrera,
+                        DescripcionCarrera = carrera.DescripcionCarrera,
+                        DirectorCarrera = carrera.DirectorCarrera,
+                        Docente = context.Docente.Find(carrera.DirectorCarrera)
+                    };
+                    carreras.Add(cf);
+                }
+            }
+            return carreras;
+        }
     }
 }

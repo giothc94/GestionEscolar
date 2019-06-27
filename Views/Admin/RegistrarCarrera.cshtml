@@ -11,6 +11,26 @@
 @if(ViewBag.mensaje == null)
 {
     <div class="row justify-content-center">
+        <div class="col-4">
+        <div class="card mt-3">
+            <div class="card-body">
+                <div class="card-title">Lista</div>
+                <div style="height: 400px;overflow: auto;">
+                    @foreach (var carrera in ViewData["listaCarreras"] as List<CarreraFull>)
+                    {
+                        <div class="border border-dark rounded p-2 mb-2 d-flex flex-wrap justify-content-between align-items-center">
+                            <div>
+                                <small><strong>ID:</strong> @carrera.IdCarrera</small><br>
+                                <small><strong>Carrera:</strong> @carrera.NombreCarrera</small><br>
+                                <small><strong>Descripcion:</strong> @carrera.DescripcionCarrera</small><br>
+                                <small><strong>Docente:</strong> @carrera.Docente.ApellidoUno @carrera.Docente.ApellidoDos @carrera.Docente.NombreUno @carrera.Docente.NombreDos</small><br>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
         <div class="col-8">
             <div class="card">
                 <div class="card-body">

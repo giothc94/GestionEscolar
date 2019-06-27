@@ -153,6 +153,7 @@ namespace GestionEscolar.Controllers
         public IActionResult RegistrarCarrera()
         {
             ViewData["listaDocentes"] = DocenteDao.ListarDocentes();
+            ViewData["listaCarreras"] = CarreraDao.ListaCarreraFull();
             return View();
         }
         [HttpPost]
