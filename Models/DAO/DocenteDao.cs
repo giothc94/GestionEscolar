@@ -42,7 +42,7 @@ namespace GestionEscolar.Models.DAO
             List<Docente> listaDocentes;
             using (var context = new GestionEscolar())
             {
-                listaDocentes = context.Docente.ToList();
+                listaDocentes = context.Docente.OrderByDescending(d => d).ToList();
             }
             return listaDocentes;
         }
@@ -52,6 +52,15 @@ namespace GestionEscolar.Models.DAO
             using (var context = new GestionEscolar())
             {
                 docente = context.Docente.Where(d => d.CedulaDocente == cedula).FirstOrDefault();
+            }
+            return docente;
+        }
+        public static Docente BuscarDocentePorId(int id)
+        {
+            Docente docente;
+            using (var context = new GestionEscolar())
+            {
+                docente = context.Docente.Where(d => d.IdDocente == id).FirstOrDefault();
             }
             return docente;
         }

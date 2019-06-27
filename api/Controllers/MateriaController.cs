@@ -14,14 +14,50 @@ namespace GestionEscolar.api.Controller
         [HttpGet("ID/{id}")]
         public ActionResult BucarMateriaPorId(int id)
         {
-            var materia = MateriaDao.MateriaPorId(id);
-            if(materia == null)
+            try
             {
-                return NotFound(id);
+                var materia = MateriaDao.MateriaPorId(id);
+                if(materia == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(materia);
+                }
             }
-            else
+            catch (System.Exception e)
             {
-                return Ok(materia);
+                Debug.WriteLine("*----------*-*--------------------------");
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e.InnerException);
+                Debug.WriteLine("*----------*-*--------------------------");
+                return NotFound();
+            }
+
+        }
+        [HttpGet("Nivel/ID/{id}")]
+        public ActionResult BucarNivelPorId(int id)
+        {
+            try
+            {
+                var nivel = MateriaDao.NivelPorId(id);
+                if(nivel == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(nivel);
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.WriteLine("*----------*-*--------------------------");
+                Debug.WriteLine(e.Message);
+                Debug.WriteLine(e.InnerException);
+                Debug.WriteLine("*----------*-*--------------------------");
+                return NotFound();
             }
 
         }

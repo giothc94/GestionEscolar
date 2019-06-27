@@ -113,9 +113,12 @@
         var btnRegistrar = document.getElementById('btnRegistrar')
         var btnCancelar = document.getElementById('btnCancelar')
         var btnModificar = document.getElementById('btnModificar')
+        btnCancelar.addEventListener('click',()=>{
+            limpiarCampos()
+            ced.value = ""
+        })
     function BuscarDocente(){
         let cedu = cedula.value
-        btnCancelar.addEventListener('click',limpiarCampos)
         if(cedu){
             var req = fetch(`https://localhost:5001/api/Docente/Cedula/${cedu}`)
             req
@@ -124,12 +127,12 @@
                 })
                 .then(function (d){
                     console.log(d)
-                    ced.value = d.cedulaDocente
-                    primerNombre.value = d.nombreUno
-                    segundoNombre.value = d.nombreDos
-                    primerApellido.value = d.apellidoUno
-                    segundoApellido.value = d.apellidoDos
-                    titulo.value  = d.titulo
+                    ced.value = d.cedulaDocente.trim()
+                    primerNombre.value = d.nombreUno.trim()
+                    segundoNombre.value = d.nombreDos.trim()
+                    primerApellido.value = d.apellidoUno.trim()
+                    segundoApellido.value = d.apellidoDos.trim()
+                    titulo.value  = d.titulo.trim()
                     btnRegistrar.classList.add('d-none')
                     btnModificar.classList.remove('d-none')
                     btnCancelar.classList.remove('d-none')
@@ -140,7 +143,6 @@
 
     function limpiarCampos(){
         cedula.value = ""
-        //ced.value = ""
         primerNombre.value = ""
         segundoNombre.value = ""
         primerApellido.value = ""
@@ -158,12 +160,12 @@
                     return resp.json()
                 })
                 .then(function (d){
-                    ced.value = d.cedulaDocente
-                    primerNombre.value = d.nombreUno
-                    segundoNombre.value = d.nombreDos
-                    primerApellido.value = d.apellidoUno
-                    segundoApellido.value = d.apellidoDos
-                    titulo.value  = d.titulo
+                    ced.value = d.cedulaDocente.trim()
+                    primerNombre.value = d.nombreUno.trim()
+                    segundoNombre.value = d.nombreDos.trim()
+                    primerApellido.value = d.apellidoUno.trim()
+                    segundoApellido.value = d.apellidoDos.trim()
+                    titulo.value  = d.titulo.trim()
                     btnRegistrar.classList.add('d-none')
                     btnModificar.classList.remove('d-none')
                     btnCancelar.classList.remove('d-none')

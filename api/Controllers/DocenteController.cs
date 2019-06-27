@@ -17,13 +17,27 @@ namespace GestionEscolar.api.Controller
         public ActionResult DocenteCedula(string cedula)
         {
             var docente = DocenteDao.BuscarDocentePorCedula(cedula);
-            if(string.IsNullOrEmpty(cedula) || string.IsNullOrWhiteSpace(cedula))
+            if (string.IsNullOrEmpty(cedula) || string.IsNullOrWhiteSpace(cedula))
             {
                 return NotFound(cedula);
             }
             else
             {
-                Debug.WriteLine("PARAMETRO: "+cedula);
+                Debug.WriteLine("PARAMETRO: " + cedula);
+                return Ok(docente);
+            }
+
+        }
+        [HttpGet("id/{id}")]
+        public ActionResult DocenteId(int id)
+        {
+            var docente = DocenteDao.BuscarDocentePorId(id);
+            if (id < 0)
+            {
+                return NotFound(id);
+            }
+            else
+            {
                 return Ok(docente);
             }
 
@@ -32,7 +46,7 @@ namespace GestionEscolar.api.Controller
         public ActionResult ListaDocentes()
         {
             List<Docente> docentes = DocenteDao.ListarDocentes();
-            if(!docentes.Any())
+            if (!docentes.Any())
             {
                 return NotFound(docentes);
             }

@@ -128,7 +128,8 @@ namespace GestionEscolar.Controllers
             var segundoApellido = form["segundoApellido"];
             var carrera = form["carrera"];
             var nivel = form["nivel"];
-            var v = EstudianteDao.IngresarEstudiante(new Estudiante(){
+            var v = EstudianteDao.IngresarEstudiante(new Estudiante()
+            {
                 CedulaEstudiante = cedula,
                 NombreUno = primerNombre,
                 NombreDos = segundoNombre,
@@ -162,7 +163,8 @@ namespace GestionEscolar.Controllers
             var descripcionCarrera = form["descripcionCarrera"];
             var idDocente = form["idDocente"];
 
-            var v = CarreraDao.IngresarCarrera(new Carrera(){
+            var v = CarreraDao.IngresarCarrera(new Carrera()
+            {
                 NombreCarrera = nombreCarrera,
                 DescripcionCarrera = descripcionCarrera,
                 DirectorCarrera = Convert.ToInt32(idDocente)
@@ -194,18 +196,27 @@ namespace GestionEscolar.Controllers
             var carrera = form["carrera"];
             var nivel = form["nivel"];
             var docente = form["docente"];
-            var verif = MateriaDao.RegistrarMateria(new Materia(){
+            var m = new Materia()
+            {
                 NombreMateria = materiaNombre,
                 IdNivel = Convert.ToInt32(nivel),
                 IdDocente = Convert.ToInt32(docente)
-            });
-            if (verif)
+            };
+            var mt = MateriaDao.MateriaPorNombre(m.NombreMateria);
+            var verif = false;
+            if(mt == null)
             {
+                verif = MateriaDao.RegistrarMateria(m);
                 ViewBag.mensaje = "Materia registrada exitosamente";
             }
             else
             {
-                ViewBag.mensaje = "No pudimos registrar la materia";
+                verif = MateriaDao.ModificarMateria(mt,m);
+                ViewBag.mensaje = "Materia MODIFICADA exitosamente";
+            }
+            if (!verif)
+            {
+                ViewBag.mensaje = "NO SE REGISTRO LA MATERIA*";
             }
             ViewData["listaDocentes"] = DocenteDao.ListarDocentes();
             ViewData["listaCarreras"] = CarreraDao.ListarCarrera();

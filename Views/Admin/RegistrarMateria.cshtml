@@ -11,10 +11,10 @@
 
 <div class="row justify-content-center">
     <div class="col-4">
-        <!-- <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar, Codigo" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-        </form> -->
+        <div class="form-inline my-2 my-lg-0">
+            <input id="busquedaId" class="form-control mr-sm-2" type="search" placeholder="Buscar, ID" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="button" onclick="busquedaMateria()" >Buscar</button>
+        </div>
         <div class="card mt-3">
             <div class="card-body">
                 <div class="card-title">Lista</div>
@@ -25,7 +25,9 @@
                             <div>
                                 <small>ID: @materia.IdMateria</small><br>
                                 <small>Materia: @materia.NombreMateria</small><br>
+                                <small>Carrera: @materia.IdNivelNavigation.IdCarreraNavigation.NombreCarrera</small><br>
                                 <small>Nivel: @materia.IdNivelNavigation.Nivel1</small><br>
+                                <small>Docente: @materia.IdDocenteNavigation.ApellidoUno @materia.IdDocenteNavigation.ApellidoDos @materia.IdDocenteNavigation.NombreUno @materia.IdDocenteNavigation.NombreDos</small><br>
                             </div>
                         </div>
                     }
@@ -51,7 +53,7 @@
                                     <option>-- Seleccione la carrera    --</option>
                                     @foreach (var carrera in ViewData["listaCarreras"] as List<Carrera>)
                                     {
-                                        <option value="@carrera.IdCarrera" >@carrera.NombreCarrera</option>
+                                        <option value="@carrera.IdCarrera" name="carrreras[]">@carrera.NombreCarrera</option>
                                     }
                                 </optgroup>
                             </select>
@@ -65,14 +67,21 @@
                         <div class="form-group">
                             <label>Docente</label>
                             <select id="docente" name="docente" class="form-control">
+                                <option value="0"> -- Seleccione el docente -- </option>
                                 @foreach (var docente in ViewData["listaDocentes"] as List<Docente>)
                                     {
-                                        <option value="@docente.IdDocente">@docente.ApellidoUno @docente.ApellidoDos @docente.NombreUno</option>
+                                        <option value="@docente.IdDocente">@docente.ApellidoUno @docente.ApellidoDos @docente.NombreUno @docente.NombreDos</option>
                                     }
                             </select>
                         </div>
                         <div class="form-group">
-                            <input class="btn btn-success form-control" value="Registrar" type="submit">
+                            <input id="btnRegistrar" class="btn btn-success form-control" value="Registrar" type="submit">
+                        </div>
+                        <div class="form-group">
+                            <input id="btnCancelar" class="btn btn-info form-control d-none" value="Cancelar" type="button">
+                        </div>
+                        <div class="form-group">
+                            <input id="btnModificar" class="btn btn-warning form-control d-none" value="Modificar" type="submit">
                         </div>
                     </div>
                 </div>
@@ -91,6 +100,9 @@
 </div>
 
 <script>
+    var materiaNombre = document.getElementById('materiaNombre')
+    var carrera = document.getElementById('carrera')
+    var docenteCombo = document.getElementById('docente')
 
     function cargarCombo(IdCarrera){
         var carrera = document.getElementById('carrera')
@@ -105,11 +117,98 @@
                     .then(function(nivel){
                         Array.from(nivel).forEach(function(nv){
                             var option = document.createElement('option')
-                            console.log(nv)
+                            option.setAttribute('name','niveles[]')
                             option.text = nv.nivel1
                             option.value = nv.idNivel
                             select.add(option)
                         })
                     })
     }
+    function busquedaMateria(){
+        var busquedaId = document.getElementById('busquedaId')
+        var materia = fetch(`https://localhost:5001/api/Materia/ID/${busquedaId.value}`)
+            materia
+                    .then(function(resp){
+                        return resp.json()
+                    })
+                    .then(function(materia){
+                        console.log(materia)
+                        var docente = busquedaDocenteId(materia.idDocente)
+                        var nivel = busquedaNivelId(materia.idNivel)
+                        materiaNombre.value = materia.nombreMateria
+                        nivel.then(n=>{
+                            for(let i = 0; i < carrera.options.length; i++){
+                                if(carrera.options[i].value == n.idCarrera){
+                                    carrera.options.selectedIndex = carrera.options[i].index
+                                }
+                            }
+                            cargarCombo(n.idCarrera)
+                            setTimeout(()=>{
+                                var nivelCombo = document.getElementById('nivel')
+                                for(let i = 0; i < nivelCombo.options.length; i++){
+                                    if(nivelCombo.options[i].value == materia.idNivel){
+                                        nivelCombo.options.selectedIndex = nivelCombo.options[i].index
+                                    }
+                                }
+                                for(let i = 0; i < docenteCombo.options.length; i++){
+                                    if(docenteCombo.options[i].value == materia.idDocente){
+                                        docenteCombo.options.selectedIndex = docenteCombo.options[i].index
+                                    }
+                                }
+                            },100)
+                            var btnCancelar = document.getElementById('btnCancelar')
+                            var btnModificar = document.getElementById('btnModificar')
+                            var btnRegistrar = document.getElementById('btnRegistrar')
+                            btnCancelar.addEventListener('click',()=>{
+                                limpiarCampos()
+                                btnRegistrar.classList.remove('d-none')    
+                                btnCancelar.classList.add('d-none')
+                                btnModificar.classList.add('d-none')
+                            })
+                            btnCancelar.classList.remove('d-none')
+                            btnModificar.classList.remove('d-none')
+                            btnRegistrar.classList.add('d-none')
+
+                        })
+                    })
+                    .catch(function(e){
+                        console.error('No pudimos hacer la peticion',e)
+                    })
+    }
+    function busquedaDocenteId(idDocente){
+        return docente = fetch(`https://localhost:5001/api/Docente/id/${idDocente}`)
+                    .then(function(resp){
+                        return resp.json()
+                    })
+                    .then(function(docente){
+                        return docente
+                    })
+                    .catch(function(e){
+                        console.error('No pudimos hacer la peticion')
+                    })
+    }
+    function busquedaNivelId(idNivel){
+        return nivel = fetch(`https://localhost:5001/api/Materia/Nivel/ID/${idNivel}`)
+                    .then(function(resp){
+                        return resp.json()
+                    })
+                    .then(function(nivel){
+                        return nivel
+                    })
+                    .catch(function(e){
+                        console.error('No pudimos hacer la peticion')
+                    })
+    }
+
+    function limpiarCampos(){
+        materiaNombre.value = ""
+        docenteCombo.options.selectedIndex = 0
+        carrera.options.selectedIndex = 0
+        var nivelCombo = document.getElementById('nivel')
+        nivelCombo.options.length = 0
+        var busquedaId = document.getElementById('busquedaId')
+        busquedaId.value = ""
+        busquedaId.focus()
+    }
+
 </script>
