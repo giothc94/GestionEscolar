@@ -60,6 +60,14 @@ namespace GestionEscolar
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+                
+                routes.MapRoute(
+                    name: "Revision",
+                    template: "{controller=Cursos}/{action=Revision}/{idMateria?}");
+                
+                routes.MapRoute(
+                    name: "Notas",
+                    template: "{controller=Notas}/{action=Index}/{idMateria?}");
             });
         }
     }

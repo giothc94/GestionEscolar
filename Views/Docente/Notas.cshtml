@@ -1,5 +1,6 @@
 @{
     ViewData["title"] = "Docente";
+    ViewData["user"] = ViewBag.Nombre;
     Layout = "_Docente";
 }
 <div class="page-dashboard pt-3">
@@ -14,35 +15,21 @@
                 <small class="text-warning">*Aqui podras ingresar las calificaciones de los estudiantes por materia</small>
             </div>
         </div>
-        <div class="row">
-            <div class="col-4">
-                <div class="h2">Niveles</div>
-                <div class="card cursor-pointer">
-                    <div class="card-body">
-                        <div class="card-title">
-                            <div class="card-text">
-                                <small>Carrera</small><br>
-                                <small>Nivel</small><br>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="row justify-content-center">
             <div class="col-8">
-                @for (int i = 0; i < 6; i++)
+                @foreach (Materia materia in ViewBag.listaMaterias as List<Materia>)
                 {
                     <div class="card mt-3 box-shadow">
                         <div class="card-body">
                             <div class="card-title h2">
-                                Matematica financiera
+                                @materia.NombreMateria
                             </div>
                             <hr>
                             <div class="card-btn">
                                 <p class="card-text">
-                                    Numero de estudiantes: 24
+                                    Nivel: @materia.IdNivelNavigation.Nivel1
                                 </p>
-                                <a class="btn btn-outline-warning" href="/Notas/Index">Ingresar notas</a>
-                                <input class="btn btn-outline-success" type="button" value="Publicar notas">
+                                <a class="btn btn-outline-warning" href="/Notas/Index?idMateria=@materia.IdMateria">Ingresar notas</a>
                             </div>
                         </div>
                     </div>

@@ -9,5 +9,6 @@ namespace GestionEscolar.Models
         public string DescripcionCarrera { get; set; }
         public int DirectorCarrera { get; set; }
         public Docente Docente { get; set; }
+        public List<Nivel> Niveles {get;set;}
     }
 }

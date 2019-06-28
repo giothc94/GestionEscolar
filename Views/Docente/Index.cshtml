@@ -1,5 +1,6 @@
 @{
     ViewData["title"] = "Docente";
+    ViewData["user"] = ViewBag.Nombre;
     Layout = "_Docente";
 }
 <div class="page-dashboard pt-3">
@@ -12,33 +13,36 @@
     <div class="page-content pt-4">
         <!-- Seccion cursos -->
         <div class="d-flex flex-wrap justify-content-center">
-            @for (int i = 0; i < 7; i++)
+            @{
+                List<Materia> materias = ViewBag.listaMaterias;
+            }
+            @if(@materias.Any())
             {
-                <div class="card mr-2 mt-2 box-shadow">
-                    <div class="card-body">
-                        <p class="card-text"> @ViewBag.Materia </p>
-                        <button type="button" class="btn btn-outline-info form-control" data-toggle="modal" data-target="#exampleModal">
-                            Revisar
-                        </button>
+                @foreach (var materia in ViewBag.listaMaterias as List<Materia>)
+                {
+                    <div class="card w-25 mr-2 mt-2 box-shadow">
+                        <div class="card-body">
+                            <p class="card-text"><strong>Nombre de la materia: </strong>  @materia.NombreMateria </p>
+                            <p class="card-text"><strong>Nivel: </strong> @materia.IdNivelNavigation.Nivel1 </p>
+                            <a class="btn btn-primary form-control" href="/Cursos/Revision?idMateria=@materia.IdMateria">Ir</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card alert alert-info">
+                            AUN NO TIENES MATERIAS ASIGNADAS
+                        </div>
                     </div>
                 </div>
             }
         </div>
         <!-- Fin seccion cursos -->
-        <!-- Inicio seccion mensaje -->
-        <div class="row justify-content-center mt-2">
-            <div class="col-8 cursor-pointer">
-                <a class="text-decoration-none text-info" href="/Mensajes">
-                    <div class="card d-flex flex-row justify-content-between align-items-center p-3">
-                        <label class="cursor-pointer">Mensajes</label>
-                        <span class="badge badge-info badge-pill">14</span>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <!-- Fin seccion mensajes -->
         <!-- Seccion Pendientes y publicaciones activas -->
-        <div class="row justify-content-center mt-2">
+        <!-- <div class="row justify-content-center mt-2">
             <div class="col-5">
                 <div class="list-group box-shadow">
                     <a class="list-group-item list-group-item-action text-white bg-primary" style="cursor: auto;">
@@ -59,29 +63,7 @@
                     <a href="#" class="list-group-item list-group-item-action">Tarea: Matematica financiera</a>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Fin Seccion Pendientes y publicaciones activas -->
     </div>
-     <!-- Modal info curso -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Informacion</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="card-title h2">A4-B3</div>
-                <p class="card-text"> @ViewBag.Materia </p>
-                <p class="card-text">Numero de estudiantes: @ViewBag.nr</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <a class="btn btn-primary" href="/Cursos/Revision">Ver info</a>
-            </div>
-            </div>
-        </div>
-    </div>
-    <!-- Fin Modal info curso -->
+     

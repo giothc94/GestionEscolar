@@ -62,10 +62,12 @@ namespace GestionEscolar.Models.DAO
         public static List<CarreraFull> ListaCarreraFull()
         {
             var lista = new List<Carrera>();
+            var niveles = new List<Nivel>();
             var carreras = new List<CarreraFull>();
             using (var context = new GestionEscolar())
             {
                 lista = context.Carrera.ToList();
+                
                 foreach (var carrera in lista)
                 {
                     CarreraFull cf = new CarreraFull()
@@ -74,10 +76,21 @@ namespace GestionEscolar.Models.DAO
                         NombreCarrera = carrera.NombreCarrera,
                         DescripcionCarrera = carrera.DescripcionCarrera,
                         DirectorCarrera = carrera.DirectorCarrera,
-                        Docente = context.Docente.Find(carrera.DirectorCarrera)
+                        Docente = context.Docente.Find(carrera.DirectorCarrera),
+                        Niveles = context.Nivel.Include(n=>n.Materia).Where(n=>n.IdCarrera == carrera.IdCarrera).ToList()
                     };
                     carreras.Add(cf);
                 }
+                    foreach (var c in carreras)
+                    {
+                        foreach(var nivel in c.Niveles)
+                        {
+                            foreach (var m in nivel.Materia)
+                            {
+                                m.IdDocenteNavigation = context.Docente.Find(m.IdDocente);
+                            }
+                        }
+                    }
             }
             return carreras;
         }

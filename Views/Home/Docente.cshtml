@@ -4,32 +4,43 @@
     <li class="breadcrumb-item active" aria-current="page">Docente </li>
   </ol>
 </nav>
-
-<div class="row justify-content-center mt-1">
-    <div class="col-sm-auto col-md-6 col-lg-4">
-        <div class="card alert alert-info">
-            <small>No reveles a nadie tu clave o usuario, manten la integridad de las notas.</small>
+@if(ViewBag.mensaje != null)
+{
+<div class="row">
+    <div class="col-12">
+        <div class="card alert alert-danger">
+            @ViewBag.mensaje
+            <a asp-controller="Home" asp-action="Docente" class="btn btn-outline-danger">Regresar</a>
         </div>
     </div>
 </div>
-<div class="row justify-content-center mt-1">
-    <div class="col-sm-auto col-md-6 col-lg-4">
-        <div class="card shadow-lg">
-            <div class="card-body">
-                <figure class="justify-content-center">
-                    <img class="img-fluid" src="https://achieve.lausd.net/cms/lib/CA01000043/Centricity/domain/779/welligentbuttons/login.png">
-                </figure>
-                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Ingrese su usuario">
-                </div>
-                <div class="form-group">
-                    <input class="form-control" type="text" placeholder="Ingrese su clave">
-                </div>
-                <div class="form-group">
-                    <!-- <input class=" btn btn-primary form-control" type="submit" value="Iniciar sesion"> -->
-                    <a href="/Docente/Index " class=" btn btn-primary form-control">Iniciar sesion</a>
+}
+else
+{
+    <div class="row justify-content-center mt-1">
+        <div class="col-sm-auto col-md-6 col-lg-4">
+            <div class="card alert alert-info">
+                <small>No reveles a nadie tu clave o usuario, manten la integridad de las notas.</small>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-1">
+        <div class="col-sm-auto col-md-6 col-lg-4">
+            <div class="card shadow-lg">
+                <div class="card-body">
+                    <form asp-controller="Home" asp-action="Docente" method="POST">
+                        <div class="form-group">
+                            <input name="user" class="form-control" type="text" placeholder="Ingrese su usuario">
+                        </div>
+                        <div class="form-group">
+                            <input name="password" class="form-control" type="password" placeholder="Ingrese su clave">
+                        </div>
+                        <div class="form-group">
+                            <input class=" btn btn-primary form-control" type="submit" value="Iniciar sesion">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+}

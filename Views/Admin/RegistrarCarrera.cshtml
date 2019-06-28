@@ -24,6 +24,19 @@
                                 <small><strong>Carrera:</strong> @carrera.NombreCarrera</small><br>
                                 <small><strong>Descripcion:</strong> @carrera.DescripcionCarrera</small><br>
                                 <small><strong>Docente:</strong> @carrera.Docente.ApellidoUno @carrera.Docente.ApellidoDos @carrera.Docente.NombreUno @carrera.Docente.NombreDos</small><br>
+                                @foreach (var nivel in @carrera.Niveles)
+                                {   
+                                    @if(@nivel.Materia.Any())
+                                    {
+                                        <small><strong>Nivel:</strong> @nivel.Nivel1</small><br>
+                                        <small>Materias:</small><br>
+                                        @foreach (var materia in @nivel.Materia)
+                                        {
+                                            <small class="badge badge-info"><strong></strong> @materia.NombreMateria</small>
+                                        }
+                                        <br>
+                                    }
+                                }
                             </div>
                         </div>
                     }

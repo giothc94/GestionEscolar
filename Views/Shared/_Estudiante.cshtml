@@ -28,14 +28,14 @@
                     <figure class="img-dashboard">
                         <img width="200" height="200" src="http://www.servicio.sistemascontino.com.mx/imagenes/avatar.jpg">
                     </figure>
-                    <p class="h3" style="color: lightgray !important">Gabriel Costta</p>
-                    <p class="h3" style="color: lightgray !important">1716715972</p>
+                    <p class="h3" style="color: lightgray !important">@ViewData["nameUser"]</p>
+                    <p class="h3" style="color: lightgray !important">@ViewData["ciUser"]</p>
                 </div>
                 <div class="items-dashboard">
                     <a class="item-dashboard w-100 text-decoration-none text-white color-purpura-dark" href="/Estudiante/">Mis notas</a>
-                    <a class="item-dashboard text-decoration-none text-white color-purpura-dark" href="/Estudiante/Tareas">Mis tareas</a>
-                    <a class="item-dashboard text-decoration-none text-white color-purpura-dark" href="/Estudiante/Foros">Mis hilos</a>
-                <a class="btn btn-info mt-5 mr-2" href="/Home/Docente">Cerrar sesion</a>
+                    <a class="item-dashboard w-100 text-decoration-none text-white color-purpura-dark" asp-controller="Home" asp-action="CerrarSession">Cerrar Session</a>
+                    <!-- <a class="item-dashboard text-decoration-none text-white color-purpura-dark" href="/Estudiante/Tareas">Mis tareas</a>
+                    <a class="item-dashboard text-decoration-none text-white color-purpura-dark" href="/Estudiante/Foros">Mis hilos</a> -->
                 </div>
             </div>
         </div>

@@ -1,5 +1,6 @@
 @{
     Layout = "_Docente";
+    var promedio = 0;
 }
 <div class="page-dashboard pt-3">
     <div class="alert alert-success" role="alert">
@@ -11,10 +12,10 @@
     <div class="page-content pt-4">
         <div class="row justify-content-start">
             <div class="col-6">
-                <strong>Nombre del curso: </strong><label class="text-uppercase">Matematica financiera</label>
+                <strong>Nombre del curso: </strong><label class="text-uppercase">@ViewBag.NombreMateria</label>
             </div>
         </div>
-        <div class="row justify-content-center mt-3">
+        <!-- <div class="row justify-content-center mt-3">
             <div class="col-5">
                 <div class="list-group">
                     <a class="list-group-item list-group-item-action text-white bg-warning" style="cursor: auto;">
@@ -33,50 +34,52 @@
                     <a href="#" class="list-group-item list-group-item-action">Revisar tarea: Matematica financiera</a>
                 </div>
             </div>
-        </div>
-        <div class="row justify-content-center mt-5">
-            <div class="form-group">
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Buca un estudiante" aria-label="Search">
-                    <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
-            </div>
-        </div>
+        </div> -->
         <div class="row mt-3 justify-content-center">
             <div class="col-10">
                 <table>
                     <thead>
-                        <th class="bg-info text-white celda-head">Nro</th>
                         <th class="bg-info text-white celda-head">Estudiante</th>
-                        <th class="bg-info text-white celda-head">C.I</th>
-                        <th class="bg-info text-white celda-head">Nota Tareas</th>
-                        <th class="bg-info text-white celda-head">Nota Pruebas</th>
-                        <th class="bg-info text-white celda-head">Nota Proyecto</th>
-                        <th class="bg-info text-white celda-head">Promedio</th>
+                    <th class="bg-info text-white celda-head">C.I</th>
+                    <th class="bg-info text-white celda-head">Nota Deberes</th>
+                    <th class="bg-info text-white celda-head">Nota Foros</th>
+                    <th class="bg-info text-white celda-head">Nota Pruebas</th>
+                    <th class="bg-info text-white celda-head">Nota Proyecto</th>
+                    <th class="bg-info text-white celda-head">Promedio</th>
                         <th class="bg-info text-white celda-head">Observacion</th>
                     </thead>
                     <tbody>
-                        @for (int i = 1; i <= 25; i++)
+                        @foreach (var reporte in ViewBag.ListaEstudiantes as List<Reporte>)
                         {
                             <tr class="sniff-row" onmouseover="hover(event)">
-                                <td class="celda">@i</td>
-                                <td class="celda">Geovanny Arguello</td>
-                                <td class="celda">1716715972</td>
+                                <td class="celda">@reporte.IdEstudianteNavigation.ApellidoUno @reporte.IdEstudianteNavigation.ApellidoDos @reporte.IdEstudianteNavigation.NombreUno @reporte.IdEstudianteNavigation.NombreDos</td>
+                                <td class="celda">@reporte.IdEstudianteNavigation.CedulaEstudiante</td>
                                 <td class="celda">
-                                    <label>10</label>
+                                    <label>@reporte.NotaDeberes</label>
                                 </td>
                                 <td class="celda">
-                                    <label>10</label>
+                                    <label>@reporte.NotaForos</label>
                                 </td>
                                 <td class="celda">
-                                    <label>10</label>
+                                    <label>@reporte.NotaPrueba</label>
                                 </td>
                                 <td class="celda">
-                                    <label>10</label>
+                                    <label>@reporte.NotaProyecto</label>
                                 </td>
                                 <td class="celda">
-                                    <label>Aprobado</label>
+                                    <label>@string.Format("{0:00.##}",@Convert.ToDouble(@Convert.ToDouble(@reporte.NotaDeberes + @reporte.NotaForos + @reporte.NotaPrueba + @reporte.NotaProyecto)/4))</label>
                                 </td>
+                                @if(@Convert.ToDouble(@Convert.ToDouble(@reporte.NotaDeberes + @reporte.NotaForos + @reporte.NotaPrueba + @reporte.NotaProyecto)/4) > 7)
+                                {
+                                    <td class="celda">
+                                        <label>Aprobado</label>
+                                    </td>
+                                }else
+                                {
+                                    <td class="celda">
+                                        <label>Reprobado</label>
+                                    </td>
+                                }
                             </tr>
                         }
                     </tbody>

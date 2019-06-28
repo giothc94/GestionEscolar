@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace GestionEscolar.Models.DAO
 {
@@ -17,13 +19,16 @@ namespace GestionEscolar.Models.DAO
                     var UD = new UsuarioDocente()
                     {
                         Usuaio = docente.CedulaDocente,
-                        Clave = docente.CedulaDocente.Substring(0, 4),
+                        Clave = docente.CedulaDocente.Substring(0,4),
                         IdDocente = docente.IdDocente
                     };
-                    context.UsuarioDocente.Add(UD);
                     context.SaveChanges();
+                    var user = new SqlParameter("usuario", UD.Usuaio);
+                    var clave = new SqlParameter("clave", UD.Clave);
+                    var idDocente = new SqlParameter("idDocente", docente.IdDocente);
+                    var ud = context.UsuarioDocente.FromSql("EXEC AgregarUsuarioDocente @usuario, @clave, @idDocente",user,clave,idDocente).First();
+                    v = true;
                 };
-                v = true;
             }
             catch (System.Exception e)
             {

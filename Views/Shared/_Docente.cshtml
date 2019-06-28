@@ -28,14 +28,14 @@
                     <figure class="img-dashboard">
                         <img width="200" height="200" src="http://www.servicio.sistemascontino.com.mx/imagenes/avatar.jpg">
                     </figure>
-                    <p class="h3" style="color: lightgray !important">Gabriel Costta</p>
+                    <small class="h6" style="color: lightgray !important">@ViewData["user"]</small>
                 </div>
                 <div class="items-dashboard">
                     <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Index">Materias</a></div>
                     <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Notas">Notas</a></div>
-                    <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Tareas">Tareas</a></div>
-                    <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Foros">Hilos</a></div>
-                <a class="btn btn-info mt-5 mr-2" href="/Home/Docente">Cerrar sesion</a>
+                    <!-- <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Tareas">Tareas</a></div>
+                    <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" href="/Docente/Foros">Hilos</a></div> -->
+                    <div class="item-dashboard"><a class="text-decoration-none text-white color-purpura-dark" asp-controller="Home" asp-action="CerrarSession">Cerrar Session</a></div>
                 </div>
             </div>
         </div>

@@ -1,11 +1,12 @@
 @{
     Layout = "_Docente";
+    Materia materia = ViewBag.materia;
 }
 <div class="page-dashboard pt-3">
     <div class="alert alert-success" role="alert">
         <a href="/Docente/Index" class="alert-link">Docente</a><strong class="pr-1 pl-2">></strong>
         <a href="/Docente/Notas" class="alert-link">Notas</a><strong class="pr-1 pl-2">></strong>
-        <a href="/Notas/Index" class="alert-link">Curso: AR-V4</a><strong class="pr-1 pl-2">></strong>
+        <a href="/Notas/Index" class="alert-link">Curso: @materia.NombreMateria</a><strong class="pr-1 pl-2">></strong>
     </div>
     
     <div class="page-content pt-4">
@@ -14,51 +15,49 @@
             <div class="col-12">
                 <div class="form-group">
                     <div class="text-uppercase">
-                        Matematica financiera
+                         @materia.NombreMateria
                     </div>
-                    <div class="">Numero de estudiantes: <strong>25</strong></div>
                 </div>
             </div>
         </div>
         <div class="row w-100 justify-content-start m-0">
             <table>
                 <thead>
-                    <th class="bg-info text-white celda-head">Nro</th>
                     <th class="bg-info text-white celda-head">Estudiante</th>
                     <th class="bg-info text-white celda-head">C.I</th>
-                    <th class="bg-info text-white celda-head">Nota Tareas</th>
+                    <th class="bg-info text-white celda-head">Nota Deberes</th>
+                    <th class="bg-info text-white celda-head">Nota Foros</th>
                     <th class="bg-info text-white celda-head">Nota Pruebas</th>
                     <th class="bg-info text-white celda-head">Nota Proyecto</th>
-                    <th class="bg-info text-white celda-head">Promedio</th>
-                    <th class="bg-info text-white celda-head">Observacion</th>
+                    <th class="bg-info text-white celda-head">Accion</th>
                 </thead>
                 <tbody>
-                    @for (int i = 1; i <= 25; i++)
+                    @foreach (Reporte reporte in ViewBag.lista as List<Reporte>)
                     {
-                        <tr class="sniff-row" onmouseover="hover(event)">
-                            <td class="celda">@i</td>
-                            <td class="celda">Geovanny Arguello</td>
-                            <td class="celda">1716715972</td>
-                            <td class="celda">
-                                <input class="input-notas text-center" type="number" value="10">
-                            </td>
-                            <td class="celda">
-                                <input class="input-notas text-center" type="number" value="10">
-                            </td>
-                            <td class="celda">
-                                <input class="input-notas text-center" type="number" value="10">
-                            </td>
-                            <td class="celda">
-                                <label>10</label>
-                            </td>
-                            <td class="celda">
-                                <label>Aprobado</label>
-                            </td>
-                            <td class="celda">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/><path d="M0 0h24v24H0z" fill="none"/></svg>                            
-                            </td>
-                        </tr>
+                        <form asp-controller="Notas" asp-asp-action="Index" method="POST">
+                            <tr class="sniff-row" onmouseover="hover(event)">
+                                <td class="celda">@reporte.IdEstudianteNavigation.NombreUno @reporte.IdEstudianteNavigation.NombreDos @reporte.IdEstudianteNavigation.ApellidoUno @reporte.IdEstudianteNavigation.ApellidoDos</td>
+                                <td class="celda">@reporte.IdEstudianteNavigation.CedulaEstudiante</td>
+                                <td class="celda">
+                                    <input type="hidden" name="cedulaReporte" value="@reporte.IdEstudianteNavigation.CedulaEstudiante">
+                                    <input type="hidden" name="idReporte" value="@reporte.IdReporte">
+                                    <input name="notaDeberes" class="input-notas text-center" type="text" value="@reporte.NotaDeberes.ToString().Replace(',','.')">
+                                </td>
+                                <td class="celda">
+                                    <input name="notaNotaForos" class="input-notas text-center" type="text" value="@reporte.NotaForos.ToString().Replace(',','.')">
+                                </td>
+                                <td class="celda">
+                                    <input name="notaNotaPrueba" class="input-notas text-center" type="text" value="@reporte.NotaPrueba.ToString().Replace(',','.')">
+                                </td>
+                                <td class="celda">
+                                    <input name="notaNotaProyecto" class="input-notas text-center" type="text" value="@reporte.NotaProyecto.ToString().Replace(',','.')">
+                                </td>
+                                <td class="celda">
+                                    <input class="btn btn-primary " type="submit" value="Guardar">
+                                </td>
+                            </tr>
+
+                        </form>
                     }
                 </tbody>
             </table>

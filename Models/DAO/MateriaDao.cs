@@ -45,16 +45,16 @@ namespace GestionEscolar.Models.DAO
                 {
                     context.Materia.Add(materia);
                     context.SaveChanges();
+                    v = true;
                 }
-                v = true;
             }
             catch (System.Exception e)
             {
-                Debug.WriteLine("-------------------------DEBUGGER INGRESO CARRERA-----------------------------------");
+                Debug.WriteLine("-------------------------DEBUGGER INGRESO MATERIA-----------------------------------");
                 Debug.WriteLine("DEBUGGER::MESSAGE:: " + e.Message);
                 Debug.WriteLine("DEBUGGER::STACKTRACE:: " + e.StackTrace);
                 Debug.WriteLine("DEBUGGER::INNEREXCEPTION:: " + e.InnerException);
-                Debug.WriteLine("-------------------------DEBUGGER INGRESO CARRERA-----------------------------------");
+                Debug.WriteLine("-------------------------DEBUGGER INGRESO MATERIA-----------------------------------");
                 v = false;
             }
             return v;

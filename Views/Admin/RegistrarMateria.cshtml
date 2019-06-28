@@ -70,7 +70,7 @@
                                 <option value="0"> -- Seleccione el docente -- </option>
                                 @foreach (var docente in ViewData["listaDocentes"] as List<Docente>)
                                     {
-                                        <option value="@docente.IdDocente">@docente.ApellidoUno @docente.ApellidoDos @docente.NombreUno @docente.NombreDos</option>
+                                        <option value="@docente.IdDocente">@docente.ApellidoUno @docente.ApellidoDos @docente.NombreUno @docente.NombreDos | <small>@docente.Titulo</small> </option>
                                     }
                             </select>
                         </div>

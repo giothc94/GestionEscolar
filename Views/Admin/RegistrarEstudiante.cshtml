@@ -14,13 +14,14 @@
             <div class="card-body">
                 <div class="card-title">Lista</div>
                 <div style="height: 400px;overflow: auto;">
-                    @foreach (var estudiante in ViewData["listaEstudiantes"] as List<Estudiante>)
+                    @foreach (var estudiante in ViewData["listaEstudiantes"] as List<EstudianteFull>)
                     {
                         <div class="border border-dark rounded p-2 mb-2 d-flex flex-wrap justify-content-between align-items-center">
                             <div>
+                                <small><strong>@estudiante.ApellidoUno.ToUpper() @estudiante.ApellidoDos.ToUpper() @estudiante.NombreUno.ToUpper() @estudiante.NombreDos.ToUpper()</strong></small><br>
                                 <small>Cedula: @estudiante.CedulaEstudiante</small><br>
-                                <small>Nombres:</small><br>
-                                <small>@estudiante.ApellidoUno.ToUpper() @estudiante.ApellidoDos.ToUpper() @estudiante.NombreUno.ToUpper() @estudiante.NombreDos.ToUpper()</small><br>
+                                <small>Nivel: @estudiante.nivel.Nivel1</small><br>
+                                <small>Carrera: @estudiante.nivel.IdCarreraNavigation.NombreCarrera.ToUpper()</small><br>
                             </div>
                         </div>
                     }
